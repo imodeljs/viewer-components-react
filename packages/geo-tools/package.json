@@ -32,6 +32,23 @@
     "pseudolocalize": "betools pseudolocalize --englishDir ./public/locales/en --out ./lib/public/locales/en-PSEUDO",
     "test": "mocha --opts ./mocha.opts \"./lib/test/**/*.test.js\""
   },
+  "eslintConfig": {
+    "extends": "./node_modules/@bentley/build-tools/.eslintrc.js"
+  },
+  "nyc": {
+    "branches": 25,
+    "check-coverage": true,
+    "extends": "./node_modules/@bentley/build-tools/.nycrc",
+    "functions": 60,
+    "lines": 60,
+    "require": [
+      "ignore-styles",
+      "jsdom-global/register",
+      "source-map-support/register",
+      "ts-node/register"
+    ],
+    "statements": 60
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "i18next": "^10.2.2",
@@ -105,22 +122,5 @@
     "@bentley/ui-framework": "^2.9.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
-  },
-  "nyc": {
-    "extends": "./node_modules/@bentley/build-tools/.nycrc",
-    "require": [
-      "ignore-styles",
-      "jsdom-global/register",
-      "source-map-support/register",
-      "ts-node/register"
-    ],
-    "check-coverage": true,
-    "statements": 60,
-    "branches": 25,
-    "functions": 60,
-    "lines": 60
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/@bentley/build-tools/.eslintrc.js"
   }
 }
