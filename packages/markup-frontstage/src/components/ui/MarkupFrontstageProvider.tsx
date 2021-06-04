@@ -13,7 +13,7 @@ import {
   ViewState,
 } from "@bentley/imodeljs-frontend";
 import { MarkupApp, MarkupSelected } from "@bentley/imodeljs-markup";
-import { WidgetState, UiError } from "@bentley/ui-abstract";
+import { UiError, WidgetState } from "@bentley/ui-abstract";
 import { Point } from "@bentley/ui-core";
 import {
   ConfigurableUiControlConstructor,
@@ -32,10 +32,7 @@ import {
   Zone,
 } from "@bentley/ui-framework";
 import React from "react";
-
 import { MarkupFrontstage } from "../../MarkupFrontstage";
-import MarkupSettingsPanel from "../toolbar/MarkupSettingsPanel";
-import { MarkupToolWidget } from "../toolbar/MarkupToolWidget";
 import { createMarkupSavedViewData } from "../../services/SavedView";
 import {
   AddMarkupEvent,
@@ -44,6 +41,9 @@ import {
   ViewElementDictionary,
 } from "../../util/MarkupTypes";
 import { createViewStateProps } from "../../util/MarkupViewStateAdapter";
+import MarkupSettingsPanel from "../toolbar/MarkupSettingsPanel";
+import { MarkupToolWidget } from "../toolbar/MarkupToolWidget";
+
 
 export class MarkupFrontstageProvider extends FrontstageProvider {
   private readonly _contentGroup: ContentGroup;
@@ -305,6 +305,7 @@ export class MarkupFrontstageProvider extends FrontstageProvider {
             id: MarkupFrontstageConstants.WIDGET_ID,
             pt: popupPoint,
             component: <MarkupSettingsPanel point={popupPoint} />,
+            parentDocument: view.vpDiv.ownerDocument
           });
           FrontstageManager.activeFrontstageDef
             ?.findWidgetDef(MarkupFrontstageConstants.WIDGET_ID)

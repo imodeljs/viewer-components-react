@@ -21,8 +21,6 @@ package-lock.json
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variables file
-.env
 
 # trash
 *.bak

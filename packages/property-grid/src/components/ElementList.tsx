@@ -3,10 +3,9 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import * as React from "react";
-import * as classnames from "classnames";
-import "./ElementList.scss";
-
+import { IModelConnection } from "@bentley/imodeljs-frontend";
+import { InstanceKey } from "@bentley/presentation-common";
+import { PresentationLabelsProvider } from "@bentley/presentation-components";
 import {
   PropertyDescription,
   PropertyEditorInfo,
@@ -21,12 +20,11 @@ import {
   SimpleTableDataProvider,
   Table,
 } from "@bentley/ui-components";
-
-import { PropertyGridManager } from "../PropertyGridManager";
 import { Icon } from "@bentley/ui-core";
-import { InstanceKey } from "@bentley/presentation-common";
-import { PresentationLabelsProvider } from "@bentley/presentation-components";
-import { IModelConnection } from "@bentley/imodeljs-frontend";
+import classnames from "classnames";
+import * as React from "react";
+import { PropertyGridManager } from "../PropertyGridManager";
+import "./ElementList.scss";
 
 export interface ElementListProps {
   iModelConnection: IModelConnection;
