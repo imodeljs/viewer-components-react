@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@bentley/property-grid-react",
+      "comment": "Changes the PropertyGrid UiProvider to use a new PropertyGrid functional component",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@bentley/property-grid-react",
+  "email": "48142512+spap975@users.noreply.github.com"
+}

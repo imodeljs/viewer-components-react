@@ -1,48 +1,49 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
-
-import { connect } from "react-redux";
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { I18N } from "@bentley/imodeljs-i18n";
 import {
   AbstractWidgetProps,
   StagePanelLocation,
   StagePanelSection,
+  StageUsage,
   UiItemsProvider,
 } from "@bentley/ui-abstract";
-import { FrameworkState } from "@bentley/ui-framework";
-import { PropertyGrid, PropertyGridProps } from "./PropertyGrid";
+import { PropertyGridProps } from "../property-grid-react";
 import * as React from "react";
-
-// Map framework state to property grid props
-const mapStateToProps = (state: FrameworkState): PropertyGridProps => {
-  return {
-    iModelConnection: state.sessionState.iModelConnection,
-    projectId: state.sessionState.iModelConnection.iModelToken.contextId,
-  };
-};
-
-// tslint:disable-next-line: variable-name
-const ConnectedPropertyGrid = connect(mapStateToProps)(PropertyGrid);
+import { PresentationPropertyGridWidget } from "./PresentationPropertyGridWidget2";
 
 /** Provides the property grid widget to zone 9 */
 export class PropertyGridUiItemsProvider implements UiItemsProvider {
   public readonly id = "PropertyGridUiitemsProvider";
   public static i18n: I18N;
 
+  private _props?: Partial<PropertyGridProps>;
+
+  constructor(props?: Partial<PropertyGridProps>) {
+    this._props = props;
+  }
+
   public provideWidgets(
     _stageId: string,
-    _stageUsage: string,
+    stageUsage: string,
     location: StagePanelLocation,
-    _section: StagePanelSection | undefined,
+    section?: StagePanelSection | undefined
   ): ReadonlyArray<AbstractWidgetProps> {
     const widgets: AbstractWidgetProps[] = [];
-    if (location === StagePanelLocation.Right) {
+    if (
+      stageUsage === StageUsage.General &&
+      location === StagePanelLocation.Right &&
+      section === StagePanelSection.Start
+    ) {
       widgets.push({
         id: "propertyGrid",
-        getWidgetContent: () => <ConnectedPropertyGrid />,
+        label: "Properties",
+        getWidgetContent: () => (
+          <PresentationPropertyGridWidget {...this._props} />
+        ),
       });
     }
 
